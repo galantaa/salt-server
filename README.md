@@ -9,7 +9,7 @@ There are 2 endpoints:
   send a request to validate it
 
 ## Run locally
-clone the repo
+clone the repo,
 create a python venv and activate it
 ```
 $ python3 -m venv venv
