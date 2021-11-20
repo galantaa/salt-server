@@ -1,5 +1,6 @@
 import unittest
 import json
+import os
 from models import Model
 from httpx import AsyncClient
 
@@ -12,7 +13,9 @@ class TestServerE2e(unittest.IsolatedAsyncioTestCase):
 
     @staticmethod
     def _add_models_from_file():
-        models_file = open('models.json')
+        dirname = os.path.dirname(__file__)
+        models_filename = os.path.join(dirname, 'models.json')
+        models_file = open(models_filename)
         models_list = json.load(models_file)
         for model in models_list:
             models.add_model(Model(**model))
@@ -25,7 +28,9 @@ class TestServerE2e(unittest.IsolatedAsyncioTestCase):
         Load all the models from the example file and run validations for all the example requests.
         Making sure it won't crash and that results looks ok
         """
-        requests_file = open('requests.json')
+        dirname = os.path.dirname(__file__)
+        requests_filename = os.path.join(dirname, 'requests.json')
+        requests_file = open(requests_filename)
         requests = json.load(requests_file)
         async with AsyncClient(app=app, base_url="http://test") as ac:
             for request in requests:
