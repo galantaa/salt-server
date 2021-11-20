@@ -23,20 +23,20 @@ class Requests:
         self._param_types = [QUERY_PARAMS, HEADERS, BODY]
 
     async def validate_request(self, request: dict):
-            result = {}
-            # TODO: add validations for no path / method
-            matching_model = await self._get_matching_model(request)
-            if not matching_model:
-                result['status'] = 'valid'
-                result['message'] = 'missing-model'
-                return result
-            abnormal_fields = self._get_abnormal_fields(matching_model, request)
-            if len(abnormal_fields) == 0:
-                result['status'] = 'valid'
-            else:
-                result['status'] = 'invalid'
-                result['abnormal_fields'] = abnormal_fields
+        result = {}
+        # TODO: add validations for no path / method
+        matching_model = await self._get_matching_model(request)
+        if not matching_model:
+            result['status'] = 'valid'
+            result['message'] = 'missing-model'
             return result
+        abnormal_fields = self._get_abnormal_fields(matching_model, request)
+        if len(abnormal_fields) == 0:
+            result['status'] = 'valid'
+        else:
+            result['status'] = 'invalid'
+            result['abnormal_fields'] = abnormal_fields
+        return result
 
     def _get_abnormal_fields(self, matching_model, request):
         abnormal_fields = []
@@ -57,7 +57,6 @@ class Requests:
     def _validate_required_fields(self, model, request, param_type):
         try:
             missing_required_fields = []
-            # get_request_fields_names:
             request_fields_names = [field.get('name') for field in request.get(param_type, [])]
             for model_field in model.get(param_type, []):
                 if model_field.get('required') and model_field.get('name') not in request_fields_names:

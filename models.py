@@ -6,15 +6,14 @@ from pydantic import BaseModel
 # TODO: add validations to name, types, required
 class Model(BaseModel):
     path: str
-    method: str  # can change to enum
-    query_params: list  # can add list of what
+    method: str
+    query_params: list
     headers: list
     body: list
 
 
 class Models:
     def __init__(self):
-        # maybe move it to main class!! so it'll be easy in tests to create it
         self.models = {}
 
     def add_model(self, model: Model):
@@ -27,10 +26,10 @@ class Models:
     @staticmethod
     def parse_model(model: Model):
         try:
-            key = f"({model.path}, {model.method})"  # TODO: changed it to str in the mean while, think about it.
+            key = f"({model.path}, {model.method})"
             parsed_model = {
                 key: {
-                    "query_params": model.query_params,  # TODO: make it nicer, at least static str
+                    "query_params": model.query_params,
                     "headers": model.headers,
                     "body": model.body
                 }
