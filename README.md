@@ -37,9 +37,9 @@ Now you can send your requests :)
    which can support the document structure I used to save the models,
    and it is also considered the right solution for high traffic,
    as this server needs to handle.
-   
+
     I'd use MongoDB because it should be great in terms of performance,
    and it is well adopted and considered robust and easy to install and maintain.
-   
+
   - If I'd used a DB, the web server should support async I/O well.
    I know that Tornado is good for that.
