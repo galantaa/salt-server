@@ -9,7 +9,7 @@ models = Models()
 requests = Requests(models)
 
 
-@app.post("/model/")
+@app.post("/models/create")
 def add_model(new_model: Model):
     try:
         models.add_model(new_model)

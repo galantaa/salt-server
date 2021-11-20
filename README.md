@@ -3,7 +3,7 @@ validate requests -- lightning fast 💨
 
 ## API
 There are 2 endpoints:
-  - post "/model/"
+  - post "/models/create"
   send a valid model to upload to DB
   - post "/requests/validate"
   send a request to validate it
